@@ -1,6 +1,12 @@
-# LyraSync: Asynchronous Applied AI Pipeline
+# LyraSync: Asynchronous Applied AI Pipeline ()
 
 An event-driven backend service that processes unstructured audio data from field environments, utilizes Large Language Models (LLMs) for intent classification and data extraction, and synchronously updates relational databases.
+
+## 🔒 Repository Status & Source Code Visibility
+
+This repository serves as the **Public Architectural Overview** for the Lyra pipeline. 
+
+The core source code, proprietary agentic workflows, and production deployment configurations are currently hosted in a **private repository**. This decision was made to protect the intellectual property, custom LLM system prompts, and security architecture of the commercial MVP.
 
 ## 🏗️ System Architecture & Tech Stack
 
