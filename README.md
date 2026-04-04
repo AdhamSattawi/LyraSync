@@ -1,4 +1,4 @@
-# LyraSync: Asynchronous Applied AI Pipeline ()
+# LyraSync: Asynchronous Applied AI Pipeline
 
 An event-driven backend service that processes unstructured audio data from field environments, utilizes Large Language Models (LLMs) for intent classification and data extraction, and synchronously updates relational databases.
 
