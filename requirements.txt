@@ -1,0 +1,35 @@
+# Web Framework
+fastapi
+uvicorn[standard]
+gunicorn
+# HTTP requests
+httpx
+# Data validation
+pydantic
+pydantic-settings
+# Database
+sqlalchemy
+alembic
+asyncpg
+redis
+# AI & integration
+openai
+python-multipart
+weasyprint # handeling PDF
+aiofiles
+jinja2 # Allows to inject data from Jsom to HTML
+# Testing
+pytest
+pytest-asyncio
+# Messaging
+twilio
+# Environment variables
+python-dotenv
+# Security
+argon2-cffi
+passlib
+python-jose[cryptography]
+# Rate Limiting
+slowapi
+# Azure Blob Storage
+azure-storage-blob

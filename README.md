@@ -4,9 +4,9 @@ An event-driven backend service that processes unstructured audio data from fiel
 
 ## 🔒 Repository Status & Source Code Visibility
 
-This repository serves as the **Public Architectural Overview** for the Lyra pipeline. 
+This repository serves as the **Public Architectural Overview** for the LyraSync pipeline. 
 
-The core source code, proprietary agentic workflows, and production deployment configurations are currently hosted in a **private repository**. This decision was made to protect the intellectual property, custom LLM system prompts, and security architecture of the commercial MVP.
+While the full core source code, proprietary agentic workflows, and production deployment configurations are currently hosted in a **private repository**, this part is open-source. This decision was made to protect the intellectual property, custom LLM system prompts, and security architecture of the commercial MVP.
 
 ## 🏗️ System Architecture & Tech Stack
 

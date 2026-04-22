@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="{{ language_code }}" dir="{{ text_direction }}">
+
+
+<head>
+    <meta charset="UTF-8">
+    <title>Invoice {{ invoice.number }}</title>
+    <style>
+        /* PDF Page Setup */
+        @page {
+            margin: 1in;
+            size: letter;
+        }
+
+        /* General Typography & Colors */
+        body {
+            font-family: 'Helvetica Neue', 'Helvetica', Arial, sans-serif;
+            color: #333;
+            font-size: 14px;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Layout Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        td {
+            vertical-align: top;
+        }
+
+        /* Header Section */
+        .header-table {
+            margin-bottom: 40px;
+        }
+
+        .header-table td {
+            border: none;
+        }
+
+        .business-info h1 {
+            margin: 0;
+            color: #2c3e50;
+            font-size: 28px;
+        }
+
+        .invoice-title h2 {
+            margin: 0;
+            font-size: 36px;
+            color: #e0e0e0;
+            text-align: right;
+            text-transform: uppercase;
+        }
+
+        .invoice-meta {
+            text-align: right;
+            margin-top: 10px;
+        }
+
+        /* RTL overrides — activated by dir="rtl" on <html> */
+        [dir="rtl"] .invoice-title h2,
+        [dir="rtl"] .invoice-meta {
+            text-align: left;
+        }
+
+        [dir="rtl"] .text-right {
+            text-align: left;
+        }
+
+        [dir="rtl"] .totals-table {
+            float: left;
+        }
+
+
+        /* Client Section */
+        .client-section {
+            margin-bottom: 40px;
+        }
+
+        .client-section h3 {
+            margin: 0 0 5px 0;
+            color: #7f8c8d;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Line Items Table */
+        .items-table {
+            margin-bottom: 40px;
+        }
+
+        .items-table th {
+            background-color: #f8f9fa;
+            border-bottom: 2px solid #bdc3c7;
+            padding: 10px;
+            font-size: 12px;
+            text-transform: uppercase;
+            color: #7f8c8d;
+        }
+
+        .items-table td {
+            padding: 12px 10px;
+            border-bottom: 1px solid #ecf0f1;
+        }
+
+        .text-right {
+            text-align: right;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        /* Totals Section */
+        .totals-wrapper {
+            width: 100%;
+        }
+
+        .totals-table {
+            width: 40%;
+            float: right;
+        }
+
+        .totals-table td {
+            padding: 8px 10px;
+            border-bottom: 1px solid #ecf0f1;
+        }
+
+        .totals-table tr.final-total td {
+            border-bottom: none;
+            border-top: 2px solid #2c3e50;
+            font-weight: bold;
+            font-size: 18px;
+            color: #2c3e50;
+        }
+    </style>
+</head>
+
+<body>
+
+    <table class="header-table">
+        <tr>
+            <td class="business-info">
+                <h1>{{ business.name }}</h1>
+                <p>
+                    {{ business.address }}<br>
+                    Phone: {{ business.phone }}<br>
+                    {% if business.email %}Email: {{ business.email }}{% endif %}
+                </p>
+            </td>
+            <td>
+                <div class="invoice-title">
+                    <h2>Invoice</h2>
+                </div>
+                <div class="invoice-meta">
+                    <strong>Invoice #:</strong> {{ invoice.number }}<br>
+                    <strong>Date:</strong> {{ invoice.date }}<br>
+                    <strong>Due Date:</strong> {{ invoice.due_date }}
+                </div>
+            </td>
+        </tr>
+    </table>
+
+    <div class="client-section">
+        <h3>Bill To:</h3>
+        <strong>{{ client.name }}</strong><br>
+        {% if client.address %}{{ client.address }}<br>{% endif %}
+        {% if client.phone %}{{ client.phone }}<br>{% endif %}
+    </div>
+
+    <table class="items-table">
+        <thead>
+            <tr>
+                <th>Description</th>
+                <th class="text-center">Qty</th>
+                <th class="text-right">Unit Price</th>
+                <th class="text-right">Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in items %}
+            <tr>
+                <td>{{ item.description }}</td>
+                <td class="text-center">{{ item.quantity }}</td>
+                <td class="text-right">{{ item.unit_price_formatted }}</td>
+                <td class="text-right">{{ item.total_formatted }}</td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="4" class="text-center">No line items found.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="totals-wrapper">
+        <table class="totals-table">
+            <tr>
+                <td>Subtotal</td>
+                <td class="text-right">{{ invoice.subtotal_formatted }}</td>
+            </tr>
+            <tr>
+                <td>Tax ({{ invoice.tax_rate }}%)</td>
+                <td class="text-right">{{ invoice.tax_amount_formatted }}</td>
+            </tr>
+            <tr class="final-total">
+                <td>Total Due</td>
+                <td class="text-right">{{ invoice.final_amount_formatted }}</td>
+            </tr>
+        </table>
+    </div>
+
+</body>
+
+</html>
